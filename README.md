@@ -32,14 +32,24 @@ Emergency service agencies are responsible for responding to urgent and life-thr
 For more details on personas and their interactions see [What is CAD?](what_is_cad.pdf) 
 
 ### Non-Functional
-* High availability (99.999%) : This results in 5 minutes of downtime per year. 
 
+* High availability (99.999%) : This results in 5 minutes of downtime per year. 
+* Re-playability - 
+* Auditability - Determine exactly how the current state was reached and which user(s) of the system performed those actions
+* Low-Latency - 
+     
 ### Non-Goals
+
 * The communications centers themselves loose power
 * Responders devices are "off grid". Meaning there may be no meaning network access due to a lack of power in the area. 
 
 
 # Design
+
+The foundation of data representation and flow in our CAD backend system will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system.
+
+
+
 
 # Alternatives
 
