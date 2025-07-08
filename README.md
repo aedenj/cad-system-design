@@ -85,6 +85,23 @@ This ensures that the read models are strictly consistent with the event stream 
         </ul>
     </td>
   </tr>
+  <tr>
+    <td colspan="3"><h4>Live Updates</h4></td>
+  </tr>
+  <tr>
+    <td><b>Polling</b></td>
+    <td>
+        <ul>
+            <li>It's simple, the server would then returns updates that were posted after the since the last one</li>
+        </ul>
+    </td>
+    <td>
+        <ul>
+           <li>Puts additional strain on the database during peak times.</li>
+        </ul>
+    </td>
+  </tr>
+ 
 </table>
 
 
