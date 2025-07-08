@@ -97,6 +97,7 @@ This ensures that the read models are strictly consistent with the event stream 
     </td>
     <td>
         <ul>
+           <li>Experience with such systems can leave first responders with having to "guess" when all the information is in.
            <li>Puts additional strain on the database during peak times.</li>
         </ul>
     </td>
