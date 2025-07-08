@@ -49,8 +49,15 @@ For more details on personas and their interactions see [What is CAD?](what_is_c
 The foundation of data representation and flow in our CAD backend system will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system. First, we'll layout the basic system components and backend api's for creating, viewing and managing calls for service.
 
 ### On Consistency
+
+Typically the event sourcing pattern has a read side that is eventually consistent, which does carry a risk in our case. The system is responsible for communicating updates from multiple parties in near-realtime in potentially life-threatening situations so transient errors that delay updates, which omits information, may result in undesirable judgements made by first responders because those judgements were made on the information in the moment. Given our capacity needs we do have options to reasonably leverage event souring for it's replayability and auditing abilities while achieving *strict consistency* for critical read models.
+
 When a command is processed, the associated events are appended to the event stream, and the corresponding read models are updated, all within a single transaction.
-This ensures that the read models are strictly consistent with the event stream at all times, avoiding eventual consistency issues. 
+This ensures that the read models are strictly consistent with the event stream at all times, avoiding eventual consistency issues. This approach does have limitations,
+
+* First, the solution is limited to event storages that support strong transactional semantics; hence the choice of Postgres here.
+* We want to limit this approach only to critical read model updates. The more operations that are bundled together in one transaction the longer it takes to commit.
+* Some event sourcing frameworks may not be flexible enough for this strategy
 
 
 # Alternatives
@@ -74,7 +81,7 @@ This ensures that the read models are strictly consistent with the event stream 
     <td>
         <ul>
            <li>Limited to the cases where queries span either a single or only a few aggregates</li>
-           <li>Event streams may be too long</li>
+           <li>Event streams may be too long?</li>
         </ul>
     </td>
   </tr>
