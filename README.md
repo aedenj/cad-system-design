@@ -48,10 +48,41 @@ For more details on personas and their interactions see [What is CAD?](what_is_c
 
 The foundation of data representation and flow in our CAD backend system will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system. First, we'll layout the basic system components and backend api's for creating, viewing and managing calls for service.
 
-
+### On Consistency
+When a command is processed, the associated events are appended to the event stream, and the corresponding read models are updated, all within a single transaction.
+This ensures that the read models are strictly consistent with the event stream at all times, avoiding eventual consistency issues. 
 
 
 # Alternatives
+
+<table>
+  <tr>
+    <th align="left"><h3>Option</h3></th>
+    <th align="left"><h3>Pros</h3></th>
+    <th align="left"><h3>Cons</h3></th>
+  </tr>
+  <tr>
+    <td colspan="3"><h4>Consistency</h4></td>
+  </tr>
+  <tr>
+    <td><b>On-demand reads based on event stream</b></td>
+    <td>
+        <ul>
+            <li>Read models are derived from the most up to date state</li>
+        </ul>
+    </td>
+    <td>
+        <ul>
+           <li>Limited to the cases where queries span either a single or only a few aggregates</li>
+           <li>Event streams may be too long</li>
+        </ul>
+    </td>
+  </tr>
+</table>
+
+
+
+
 
 # References
  
