@@ -34,19 +34,19 @@ For more details on personas and their interactions see [What is CAD?](what_is_c
 ### Non-Functional
 
 * High availability (99.999%) : This results in 5 minutes of downtime per year. 
-* Re-playability - 
+* Re-playability - The ability to reprocess past events or inputs deterministically to achieve the same result, recover state or re-derive outputs.
 * Auditability - Determine exactly how the current state was reached and which user(s) of the system performed those actions
-* Low-Latency - 
+* The system should have low latency, broadcasting updates to all units in near-real time (perhaps < 200ms end-to-end latency under typical network conditions)
      
 ### Non-Goals
 
 * The communications centers themselves loose power
-* Responders devices are "off grid". Meaning there may be no meaning network access due to a lack of power in the area. 
+* Responders devices are "off grid". Meaning there may be no meaningful network access. 
 
 
 # Design
 
-The foundation of data representation and flow in our CAD backend system will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system.
+The foundation of data representation and flow in our CAD backend system will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system. First, we'll layout the basic system components and backend api's for creating, viewing and managing calls for service.
 
 
 
@@ -54,3 +54,4 @@ The foundation of data representation and flow in our CAD backend system will be
 # Alternatives
 
 # References
+ 
