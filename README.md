@@ -36,10 +36,51 @@ For more details on personas and their interactions see [What is CAD?](what_is_c
 * High availability (99.999%) : This results in 5 minutes of downtime per year. 
 * Re-playability - The ability to reprocess past events or inputs deterministically to achieve the same result, recover state or re-derive outputs.
 * Auditability - Determine exactly how the current state was reached and which user(s) of the system performed those actions
-* The system should have low latency, broadcasting updates to all units in near-real time (perhaps < 200ms end-to-end latency under typical network conditions)
-     
+* Latency
+  * Broadcasting updates to all units in near-real time will happen < 200ms end-to-end
+  * Searches < 1s
+
+**Understanding Capacity**
+
+To understand capacity I looked at a few sources for the number of calls for the largest city in the US, NYC. Here I list two sources,
+
+* New York City’s 911 system fields on average [approximately 33,000 emergency calls](downloads/pdf/psac2_feis/002_executive_summary.pdf), or a total of more than 12 million emergency calls per year.
+* NYC’s 911 system is the nation’s largest emergency communications system, receiving around [9 million calls each year.](https://www.nyc.gov/content/oti/pages/press-releases/next-gen-911-on-target-2024-completion)
+
+Using the aggregate number above we get ~1500 calls / hr, rounded up. The hour rate is potentially more useful here because calls for service can be open over a long period of time and thus the capabilities of the cad system will be in use. Peak traffic for a CAD system will include incident creation, unit updates, GPS/AVL events, query volume and user/unit sessions for real time updates. 
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Area</th>
+      <th>Population</th>
+      <th>Daily Incidents</th>
+      <th>Peak Hour Incidents</th>
+      <th>Estimated Field Units</th>
+      <th>GPS Updates/sec</th>
+      <th>Status Updates/sec</th>
+      <th>API Calls/sec (Peak)</th>
+      <th>External Queries/sec (Peak)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NYC</td>
+      <td>10,000,000</td>
+      <td>35,000</td>
+      <td>5,250</td>
+      <td>12,000</td>
+      <td>2,400</td>
+      <td>14</td>
+      <td>12</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+
 ### Non-Goals
 
+* Meeting needs of emergency agencies outside the US. (for now)
 * The communications centers themselves loose power
 * Responders devices are "off grid". Meaning there may be no meaningful network access. 
 
@@ -106,8 +147,7 @@ This ensures that the read models are strictly consistent with the event stream 
 </table>
 
 
-
-
-
 # References
- 
+
+* PSAC II Project Executive Summary by the NYC Mayor’s Office, July 2009, https://www.nyc.gov/html/nypd/downloads/pdf/psac2_feis/002_executive_summary.pdf
+* NYC's Next Generation 911 on Target for 2024 Completion, Dec 2022, https://www.nyc.gov/content/oti/pages/press-releases/next-gen-911-on-target-2024-completion
