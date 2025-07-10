@@ -88,7 +88,7 @@ usage of the system. (A more complete document would do a little more research o
 
 # Design
 
-The foundation of data representation and flow in our CAD backend system will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system. First, we'll layout the basic system components and backend api's for creating, viewing and managing calls for service.
+The foundation of data representation and flow in our CAD backend system will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system. First, we'll layout the basic system components and backend api's for creating, viewing, managing and receiving realtime updates for acitve calls for service. At the center for robust real time communication for responders and communication is MQTT. 
 
 ![cad excalidraw](https://github.com/user-attachments/assets/f98530ba-6a1f-40e5-9dbd-bad3a21792a0)
 
@@ -152,13 +152,14 @@ This ensures that the read models are strictly consistent with the event stream 
     <td><b>Web Sockets or Server Side Events</b></td>
     <td>
         <ul>
-            <li>It's simple, the server would then returns updates that were posted after the since the last one</li>
+            <li>Plenty of Pro's for other use cases</li>
         </ul>
     </td>
     <td>
         <ul>
-           <li>Experience with such systems can leave first responders with having to "guess" when all the information is in.
-           <li>Puts additional strain on the database during peak times.</li>
+           <li>MQTT is just tailored made for the use case so beats it out. </li>
+           <li>No built-in delivery guarantees</li>
+           <li>No offline support ... so many more</li>           
         </ul>
     </td>
   </tr>
