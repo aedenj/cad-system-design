@@ -47,7 +47,8 @@ To understand capacity I looked at a few sources for the number of calls for the
 * New York City’s 911 system fields on average [approximately 33,000 emergency calls](downloads/pdf/psac2_feis/002_executive_summary.pdf), or a total of more than 12 million emergency calls per year.
 * NYC’s 911 system is the nation’s largest emergency communications system, receiving around [9 million calls each year.](https://www.nyc.gov/content/oti/pages/press-releases/next-gen-911-on-target-2024-completion)
 
-Using the aggregate number above we get ~1500 calls / hr, rounded up. The hour rate is potentially more useful here because calls for service can be open over a long period of time and thus the capabilities of the cad system will be in use. Peak traffic for a CAD system will include incident creation, unit updates, GPS/AVL events, query volume and user/unit sessions for real time updates. 
+Peak traffic for a CAD system will include incident creation, unit updates, GPS/AVL events, query volume and user/unit sessions for real time updates. Given the total mentioned above let's attempt to estimate the 
+usage of the system. (A more complete document would do a little more research on actual figures)
 
 <table border="1">
   <thead>
@@ -67,8 +68,8 @@ Using the aggregate number above we get ~1500 calls / hr, rounded up. The hour r
     <tr>
       <td>NYC</td>
       <td>10,000,000</td>
-      <td>35,000</td>
-      <td>5,250</td>
+      <td>35,000 - Assume incident rate of 3.5%</td>
+      <td>5,250 - Assume 15% of Daily</td>
       <td>12,000</td>
       <td>2,400</td>
       <td>14</td>
@@ -82,7 +83,7 @@ Using the aggregate number above we get ~1500 calls / hr, rounded up. The hour r
 
 * Meeting needs of emergency agencies outside the US. (for now)
 * The communications centers themselves loose power
-* Responders devices are "off grid". Meaning there may be no meaningful network access. 
+
 
 
 # Design
@@ -131,6 +132,20 @@ This ensures that the read models are strictly consistent with the event stream 
   </tr>
   <tr>
     <td><b>Polling</b></td>
+    <td>
+        <ul>
+            <li>It's simple, the server would then returns updates that were posted after the since the last one</li>
+        </ul>
+    </td>
+    <td>
+        <ul>
+           <li>Experience with such systems can leave first responders with having to "guess" when all the information is in.
+           <li>Puts additional strain on the database during peak times.</li>
+        </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Web Sockets or Server Side Events</b></td>
     <td>
         <ul>
             <li>It's simple, the server would then returns updates that were posted after the since the last one</li>
