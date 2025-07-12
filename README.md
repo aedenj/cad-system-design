@@ -88,7 +88,13 @@ usage of the system. (A more complete document would do a little more research o
 
 # Design
 
-The foundation of data representation and flow in our CAD backend system will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system. First, we'll layout the basic system components and backend api's for creating, viewing, managing and receiving realtime updates for acitve calls for service. At the center for robust real time communication for responders and communication centers is MQTT. 
+The foundation of data representation and flow in our CAD backend system will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system. At the center for robust real time communication for responders and communication centers is MQTT. MQTT provdies the following advantages
+
+* Two-way communication for constrained environments (low bandwidth, high latency, unreliable networks); handles patchy cellular or WiFi networks.
+* Supports thousands of clients simultanously
+* Security: TLS Support, Authentication, Fine-Grained Authorization
+
+First, we'll layout the basic system components and backend api's for creating, viewing, managing and receiving realtime updates for acitve calls for service, 
 
 ![cad excalidraw](https://github.com/user-attachments/assets/f98530ba-6a1f-40e5-9dbd-bad3a21792a0)
 
@@ -105,6 +111,12 @@ This ensures that the read models are strictly consistent with the event stream 
 * We want to limit this approach only to critical read model updates. The more operations that are bundled together in one transaction the longer it takes to commit.
 * Some event sourcing frameworks may not be flexible enough for this strategy
 
+#### On Availaility
+
+
+**Zero-Downtime Deployment** 
+
+Blue-green deployment strategies will be used so that new versions of services can be released without taking the system offline. Container orchestration (ECS/EKS) and load balancers will be used to phase traffic gradually to new instances and revert if needed.
 
 # Alternatives
 
