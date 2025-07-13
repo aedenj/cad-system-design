@@ -115,7 +115,7 @@ Finally, Kafka will be the messaging backbone for event delivery to other system
 
 ### On Consistency
 
-Typically the event sourcing pattern has a read side that is eventually consistent, which does carry a risk in our case. The system is responsible for communicating updates from multiple parties in near-realtime in potentially life-threatening situations so transient errors that delay updates, which omits information, may result in undesirable judgements made by first responders because those judgements were made on the information in the moment. Given our capacity needs we do have options to reasonably leverage event souring for it's replayability and auditing abilities while achieving *strict consistency* for critical read models and eventual consitency in other areas deemed less critical. 
+Typically the event sourcing pattern has a read side that is eventually consistent, which does carry a risk in our case. The system is responsible for communicating updates from multiple parties in near-realtime in potentially life-threatening situations so transient errors that delay updates, which omits information, may result in undesirable judgements made by first responders because those judgements were made on the information in the moment. Given our capacity needs we do have options to reasonably leverage event souring for it's replayability and auditing abilities while achieving *strict consistency* for critical read models and eventual consistency in other areas deemed less critical. 
 
 When a command is processed, the associated events are appended to the event stream, and the corresponding read models are updated, all within a single transaction.
 This ensures that the read models are strictly consistent with the event stream at all times, avoiding eventual consistency issues. This approach does have limitations,
@@ -147,12 +147,15 @@ Blue-green deployment strategies will be used so that new versions of services c
     <td>
         <ul>
             <li>Honestly, it appears ideal on paper. It's a native event store.</li>
+            <li>Handle projections or event-handling logic within the database itself. (Can be simulated in Postgres)</li>
+            <li>Provides features for event versioning, enabling compatibility and evolution of event schemas over time.</li>
+            <li>Built-in features for event publishing and event subscription mechanisms, facilitating event-driven communication and integration within an application or across microservices,</li>
         </ul>
     </td>
     <td>
         <ul>
-           <li>Limited to the cases where queries span either a single or only a few aggregates</li>
-           <li>Event streams may be too long?</li>
+           <li>Not as mature and battle tested as Postgres</li>
+           <li>Potentially less mature tooling ecosystem</li>
         </ul>
     </td>
   </tr>
