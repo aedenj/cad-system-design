@@ -99,8 +99,8 @@ Finally, event streaming also functions as a data integration or messaging backb
 
 Let's layout the technologies, basic system components and backend api's that meet our functional and performance requirements for creating, viewing, managing and receiving realtime updates for acitve incidents, 
 
-<img width="1682" height="652" alt="cad excalidraw" src="https://github.com/user-attachments/assets/ea7c37f7-7a99-4515-b1cd-79b2d90e4974" />
 
+<img width="6574" height="3802" alt="cad excalidraw" src="https://github.com/user-attachments/assets/5da78415-ad43-4766-8b3a-7446b95f8988" />
 
 
 At the center for robust real time communication for responders and communication centers in active incidents is MQTT . MQTT provdies the following advantages
