@@ -28,6 +28,10 @@ Emergency service agencies are responsible for responding to urgent and life-thr
   - Interact with the system via a combination of the emergency radio and software running on their MDCs (Mobile Data Computers) in their units.
 * Citizens:
   * Support the ability for a citizen to self-generate a scheduled CFS (e.g. schedule a vacation check while they are out of town).
+* Analytics
+  - Track operational figures: Incident volume trends, Unit availability, Response time monitoring ...
+  - Performance & KPI Reporting: Avg Response Times, Time-to-dispatch, time-to-arrival ..
+
 
 For more details on personas and their interactions see [What is CAD?](what_is_cad.pdf) 
 
@@ -36,9 +40,11 @@ For more details on personas and their interactions see [What is CAD?](what_is_c
 * High availability (99.999%) : This results in 5 minutes of downtime per year. 
 * Re-playability - The ability to reprocess past events or inputs deterministically to achieve the same result, recover state or re-derive outputs.
 * Auditability - Determine exactly how the current state was reached and which user(s) of the system performed those actions
+* Scalablity - Handle growith and peak loads with a linear increase in resoures and cost without performance degradation.
 * Latency
   * Broadcasting updates to all units in near-real time will happen < 200ms end-to-end
   * Searches < 1s
+ 
 
 **Understanding Capacity**
 
@@ -81,20 +87,29 @@ usage of the system. (A more complete document would do a little more research o
 
 ### Non-Goals
 
-* Meeting needs of emergency agencies outside the US. (for now)
-* The communications centers themselves loose power
-
+* Solving how do deal with long-term event retention
 
 
 # Design
 
-The foundation of data representation and flow in our CAD backend system will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system. At the center for robust real time communication for responders and communication centers is MQTT. MQTT provdies the following advantages
+The central capability of our CAD system is highly available, reliable and auditable realtime communication for responders and communication centers. In order to acheive this our CAD system will be founded on [event streaming](https://www.confluent.io/learn/event-streaming/) . As an architectural pattern event streaming describes data movement a continuous stream of events and processes them as soon as a change happens. (e.g. a unit status change, new information to provide situational awareness)  
 
-* Two-way communication for constrained environments (low bandwidth, high latency, unreliable networks); handles patchy cellular or WiFi networks.
-* Supports thousands of clients simultanously
+With the foundation of data representation and flow in our CAD backend being events  implementing [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/) provides a means to replay and audit actions made in the system. 
+
+
+At the center for robust real time communication for responders and communication centers is MQTT. MQTT provdies the following advantages
+
+
+In order to meet these central fea The central technology used for communication will be MQTT(S), which provdies the following advantages
+
+* Supports push-based, real-time updates for thousands of clients simultanously.
+* Mobile Network Friendly: MQTT is designed for two-way communication in constrained environments (low bandwidth, high latency, unreliable networks). This matches first responders who may be on cellular or patchy WiFi networks.
 * Security: TLS Support, Authentication, Fine-Grained Authorization
+* MQTT clients build in offline tolerance features. e.g. buffer messages and deliver on reconnect 
 
-First, we'll layout the basic system components and backend api's for creating, viewing, managing and receiving realtime updates for acitve calls for service, 
+The foundation of data representation and flow in our CAD backend will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system. At the center for robust real time communication for responders and communication centers is MQTT. MQTT provdies the following advantages
+
+Let's layout the basic system components and backend api's for creating, viewing, managing and receiving realtime updates for acitve incidents, 
 
 ![cad excalidraw](https://github.com/user-attachments/assets/f98530ba-6a1f-40e5-9dbd-bad3a21792a0)
 
@@ -127,6 +142,23 @@ Blue-green deployment strategies will be used so that new versions of services c
     <th align="left"><h3>Cons</h3></th>
   </tr>
   <tr>
+    <td colspan="3"><h4>Event Stores</h4></td>
+  </tr>
+  <tr>
+    <td><b>KurrentDB</b></td>
+    <td>
+        <ul>
+            <li>Honestly, it appears ideal on paper. It's a native event store.</li>
+        </ul>
+    </td>
+    <td>
+        <ul>
+           <li>Limited to the cases where queries span either a single or only a few aggregates</li>
+           <li>Event streams may be too long?</li>
+        </ul>
+    </td>
+  </tr>
+  <tr>
     <td colspan="3"><h4>Consistency</h4></td>
   </tr>
   <tr>
@@ -155,8 +187,9 @@ Blue-green deployment strategies will be used so that new versions of services c
     </td>
     <td>
         <ul>
-           <li>Experience with such systems can leave first responders with having to "guess" when all the information is in.
+           <li>Not real-time, inefficient for battery and bandwidth.</li>
            <li>Puts additional strain on the database during peak times.</li>
+           <li>Experience with such systems can leave first responders with having to "guess" when all the information is in.</li>         
         </ul>
     </td>
   </tr>
@@ -175,7 +208,6 @@ Blue-green deployment strategies will be used so that new versions of services c
         </ul>
     </td>
   </tr>
- 
 </table>
 
 
@@ -183,3 +215,4 @@ Blue-green deployment strategies will be used so that new versions of services c
 
 * PSAC II Project Executive Summary by the NYC Mayor’s Office, July 2009, https://www.nyc.gov/html/nypd/downloads/pdf/psac2_feis/002_executive_summary.pdf
 * NYC's Next Generation 911 on Target for 2024 Completion, Dec 2022, https://www.nyc.gov/content/oti/pages/press-releases/next-gen-911-on-target-2024-completion
+* Event Streaming: How it Works, Benefits, and Use Cases, https://www.confluent.io/learn/event-streaming/#what-is-an-event-stream
