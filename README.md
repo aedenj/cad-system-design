@@ -87,31 +87,31 @@ usage of the system. (A more complete document would do a little more research o
 
 ### Non-Goals
 
-* Solving how do deal with long-term event retention
+* How do deal with long-term event retention and access.
 
 
 # Design
 
-The central capability of our CAD system is highly available, reliable and auditable realtime communication for responders and communication centers. In order to acheive this our CAD system will be founded on [event streaming](https://www.confluent.io/learn/event-streaming/) . As an architectural pattern event streaming describes data movement a continuous stream of events and processes them as soon as a change happens. (e.g. a unit status change, new information to provide situational awareness)  
+The central capability of our CAD system is highly available, reliable and auditable realtime communication for responders and communication centers. In order to acheive this our CAD system will be founded on [event streaming](https://www.confluent.io/learn/event-streaming/) . As an architectural pattern event streaming describes data movement as a continuous stream of events and processes them as soon as a change happens. (e.g. a unit status change, new information to provide situational awareness)  
 
-With the foundation of data representation and flow in our CAD backend being events  implementing [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/) provides a means to replay and audit actions made in the system. 
+Since events will be the foundation of data representation and flow in our CAD backend implementing [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/) provides a means to replay and audit actions made in the system. Ensuring accurate replay and audit logs requires an authoritative system of record with strong durability and transactional guarantees.
+
+Finally, event streaming also functions as a data integration or messaging backbone, letting different parts of a system communicate via events in a decoupled, asynchronous way. This trait allows us to decouple the SLA requirements of supporting capabilites like analytics. (e.g. Performance & KPI Reporting)
+
+Let's layout the technologies, basic system components and backend api's that meet our functional and performance requirements for creating, viewing, managing and receiving realtime updates for acitve incidents, 
+
+![cad excalidraw](https://github.com/user-attachments/assets/f98530ba-6a1f-40e5-9dbd-bad3a21792a0)
 
 
-At the center for robust real time communication for responders and communication centers is MQTT. MQTT provdies the following advantages
 
-
-In order to meet these central fea The central technology used for communication will be MQTT(S), which provdies the following advantages
+At the center for robust real time communication for responders and communication centers in active incidents is MQTT . MQTT provdies the following advantages
 
 * Supports push-based, real-time updates for thousands of clients simultanously.
 * Mobile Network Friendly: MQTT is designed for two-way communication in constrained environments (low bandwidth, high latency, unreliable networks). This matches first responders who may be on cellular or patchy WiFi networks.
 * Security: TLS Support, Authentication, Fine-Grained Authorization
 * MQTT clients build in offline tolerance features. e.g. buffer messages and deliver on reconnect 
 
-The foundation of data representation and flow in our CAD backend will be events. These events will be used to leverage [event sourcing](https://www.geeksforgeeks.org/system-design/event-sourcing-pattern/), which, by design, gives the system a natural way to replay and audit actions made in the system. At the center for robust real time communication for responders and communication centers is MQTT. MQTT provdies the following advantages
 
-Let's layout the basic system components and backend api's for creating, viewing, managing and receiving realtime updates for acitve incidents, 
-
-![cad excalidraw](https://github.com/user-attachments/assets/f98530ba-6a1f-40e5-9dbd-bad3a21792a0)
 
 
 
