@@ -4,7 +4,6 @@ Emergency service agencies are responsible for responding to urgent and life-thr
 
 [Computer Aided Dispatch](what_is_cad.pdf) provides an automated way for emergency service agencies to keep track of incidents, activities, information, tasks, messages and the status of deployed resources. By using a C.A.D. Dispatchers are able to see the big picture, while at the same time maintaining detailed records of plans and actions for future reference. First responders are able to clearly communicate in realtime, while having much better situational awareness of surrounding events.
 
-![Alt](cad-system-context.drawio.png)
 
 
 ## Requirements
@@ -100,7 +99,7 @@ Finally, event streaming also functions as a data integration or messaging backb
 
 Let's layout the technologies, basic system components and backend api's that meet our functional and performance requirements for creating, viewing, managing and receiving realtime updates for acitve incidents, 
 
-![cad excalidraw](https://github.com/user-attachments/assets/f98530ba-6a1f-40e5-9dbd-bad3a21792a0)
+<img width="1682" height="652" alt="cad excalidraw" src="https://github.com/user-attachments/assets/ea7c37f7-7a99-4515-b1cd-79b2d90e4974" />
 
 
 
