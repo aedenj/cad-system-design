@@ -134,7 +134,7 @@ This ensures that the read models are strictly consistent with the event stream 
 
 ### On Availaility
 
-As breifly mentioned in our design above providing availability requires,
+Our approach to availability within AWS infrastructure is redundancy as breifly mentioned in our design above providing availability in this way requires,
 
 * Services with no local state — they must be stateless, and state should be shared between regions.
 * Systems that hold state must have fast a reliable data replication between regions.
@@ -145,9 +145,13 @@ Our CAD system will be run in AWS. All AWS services specifcied in our design hav
 
 <h4 align="center"><i>A<sub>total</sub> = 1 − (1 − A)<sup>N</sup></i></h4>
 
-under the assumption our system involves the use of independent, redundant components. The theoretical availability across regions is computed as 100% minus the product of the regions failure rate, which gives us <i>99.9999% = 100% − (0.1%×0.1%)</i>
+The theoretical availability across regions is computed as 100% minus the product of the regions failure rate, which gives us <i>99.9999% = 100% − (0.1%×0.1%)</i>
 
-One of our cruicial assumptions here is that our CAD system services will meet our minimum SLA per region of 99.99% or we may blow the error budget through failover time. Acheiving this will require constant system testing. Let's take a look out how we could layour our system in AWS,
+One of our cruicial assumptions here is that our CAD system services will meet our minimum SLA per region of 99.99% or we may blow the error budget through failover time. Acheiving this will require constant system testing. 
+
+All that said computing a maximum theoretical availability is only likely to produce a rough order of magnitude calculation, but by itself is likely not to be accurate. 
+
+Let's take a look out how we could layour our system in AWS,
 
 <img width="4247" height="3478" alt="availability excalidraw" src="https://github.com/user-attachments/assets/571e3c93-c6b6-439c-bab2-a20734e9d7dc" />
 
@@ -165,8 +169,23 @@ Blue-green deployment strategies will be used so that new versions of services c
     <th align="left"><h3>Cons</h3></th>
   </tr>
   <tr>
-    <td colspan="3" ><h4>Primary Ingestion Point</h4></td>
+    <td colspan="3" ><h4>Primary Ingestion Point - What should be first stop for the data?</h4></td>
   </tr> 
+  <tr>
+    <td><b>Kafka</b></td>
+    <td>
+        <ul>
+            <li>It supports transactions and it a durable store.</li>
+            <li>Battle tested for resilience</li>
+        </ul>
+    </td>
+    <td>
+        <ul>
+           <li>Not easily queryable.</li>
+           <li>All queries for current state will hit an eventual consistency problem. (e.g. officer self-initiates an incident right before dispatch assignment)</li>
+        </ul>
+    </td>
+  </tr>
   <tr>
     <td colspan="3"><h4>Event Stores</h4></td>
   </tr>
