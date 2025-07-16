@@ -223,6 +223,20 @@ Blue-green deployment strategies will be used so that new versions of services c
         </ul>
     </td>
   </tr>
+   <tr>
+    <td><b>Eventual Consistency</b></td>
+    <td>
+        <ul>
+            <li>Isolating reads completely benefits performance, availability and technologies used, ending with the ability of building an unlimited number of read models dedicated to specific tasks with dedicated storage.</li>
+        </ul>
+    </td>
+    <td>
+        <ul>
+           <li>Limited to the cases where queries span either a single or only a few aggregates</li>
+           <li>Event streams may be too long?</li>
+        </ul>
+    </td>
+  </tr>
   <tr>
     <td colspan="3"><h4>Live Updates for Responders</h4></td>
   </tr>
