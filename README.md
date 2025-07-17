@@ -147,9 +147,11 @@ Our CAD system will be run in AWS. All AWS services specifcied in our design hav
 
 The theoretical availability across regions is computed as 100% minus the product of the regions failure rate, which gives us <i>99.9999% = 100% − (0.1%×0.1%)</i>
 
-One of our cruicial assumptions here is that our CAD system services will meet our minimum SLA per region of 99.99% or we may blow the error budget through failover time. Acheiving this will require constant system testing. 
+One of our cruicial assumptions here is that our CAD system services will meet our minimum SLA per region of 99.99% or we may blow the error budget through failover time. Acheiving this will require constant system testing. Additionally the theoretical availability within a region is
 
-All that said computing a maximum theoretical availability is only likely to produce a rough order of magnitude calculation, but by itself is likely not to be accurate. 
+<h4 align="center"><i>A<sub>region</sub> = 1 − (1 − A)<sup>N</sup></i></h4>
+
+All that said computing a maximum theoretical availability is only likely to produce a rough order of magnitude calculation, but by itself is likely not to be accurate. The above is a starting point and will need to be consistently validated against real world numbers. 
 
 Let's take a look out how we could layour our system in AWS,
 
@@ -232,8 +234,8 @@ Blue-green deployment strategies will be used so that new versions of services c
     </td>
     <td>
         <ul>
-           <li>Limited to the cases where queries span either a single or only a few aggregates</li>
-           <li>Event streams may be too long?</li>
+           <li>Complexity of implementation and maintence.</li>
+           <li>Can result in undesirable actions in the systems. Assignment of units not actually available.</li>
         </ul>
     </td>
   </tr>
