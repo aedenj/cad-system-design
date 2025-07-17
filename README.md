@@ -170,8 +170,6 @@ Blue-green deployment strategies will be used so that new versions of services c
 * Authentication & Authorization: All users must authenticate and are authorized based on role following the principle of least privilege. AWS Cognito or custom IAM-integrated authentication can be used.
 * Encryption: All data is encrypted in transit and at rest. APIs are only accessible over HTTPS/TLS, and internal service calls also use TLS within the VPC. At rest, databases (RDS, DynamoDB, etc.) use AWS KMS-managed encryption keys so that all sensitive data on disks is encrypted. 
 * Network Security: The system is deployed in a private AWS VPC with no direct internet exposure for backend instances. Only a load balancer or API gateway in a DMZ subnet accepts public traffic, and it forwards requests to the private application subnets. Security groups and network ACLs restrict access – e.g. database servers only accept connections from application servers on specific ports.
-* Monitoring & Protection: Something like CloudWatch and GuardDuty can be used to monitor for anomalies or intrusions.
-
   
 # Alternatives
 
