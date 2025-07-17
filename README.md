@@ -142,19 +142,21 @@ Our approach to availability within AWS infrastructure is redundancy as breifly 
 * We'll need a global network infrastructure to connect your different regions.
 * Avoid synchronous cross-regional calls. 
 
-Our CAD system will be run in AWS. All AWS services specifcied in our design have a minimum  multi-az / single region availability SLA of 99.99%. (e.g. [ECS / Fargate](https://aws.amazon.com/ecs/sla/?did=sla_card&trk=sla_card)). The theoretical best case across regions is defined by,
+Our CAD system will be run in AWS. All AWS services specifcied in our design have a minimum  multi-az / single region availability SLA of 99.99%. (e.g. [ECS / Fargate](https://aws.amazon.com/ecs/sla/?did=sla_card&trk=sla_card)). We will be implementing a hot stand by, which is a reduentant and indpendent copy of our system. Hence the 
+theoretical best case across regions is defined by,
 
 <h4 align="center"><i>A<sub>total</sub> = 1 − (1 − A)<sup>N</sup></i></h4>
 
-The theoretical availability across regions is computed as 100% minus the product of the regions failure rate, which gives us <i>99.9999% = 100% − (0.1%×0.1%)</i>
+which as 100% minus the product of the regions failure rate, which gives us <i>99.9999% = 100% − (0.1%×0.1%)</i> Additionally, we need to understand the availability of our hard
+external dependencies. In the case of hard dependencies we would calculate our availability as
 
-One of our cruicial assumptions here is that our CAD system services will meet our minimum SLA per region of 99.99% or we may blow the error budget through failover time. Acheiving this will require constant system testing. Additionally the theoretical availability within a region is
+<h4 align="center"><i>A<sub>workload</sub> = Avail<sub>invok</sub> × Avail<sub>dep1</sub> × Avail<sub>dep2</sub></i></h4>
 
-<h4 align="center"><i>A<sub>region</sub> = 1 − (1 − A)<sup>N</sup></i></h4>
+One of our cruicial assumptions here is that our CAD system services will meet our minimum SLA per region of 99.99% or we may blow the error budget through failover time. Acheiving this will require constant system testing. 
 
-All that said computing a maximum theoretical availability is only likely to produce a rough order of magnitude calculation, but by itself is likely not to be accurate. The above is a starting point and will need to be consistently validated against real world numbers. 
+All that said computing a maximum theoretical availability is only likely to produce a rough order of magnitude calculation, but by itself is likely not to be accurate. There are additional dependenices like the network, additional components in the individual services within a region etc. The above is a starting point and will need to be consistently validated against real world numbers. 
 
-Let's take a look out how we could layour our system in AWS,
+Now let's take a look out how we could layout our system in AWS,
 
 <img width="4247" height="3478" alt="availability excalidraw" src="https://github.com/user-attachments/assets/571e3c93-c6b6-439c-bab2-a20734e9d7dc" />
 
