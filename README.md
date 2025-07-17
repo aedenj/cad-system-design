@@ -120,7 +120,7 @@ At the center of robust real time communication for responders and communication
 Finally, Kafka will be the messaging backbone for event delivery to other system capabilities (e.g. realtime communication, analytics, realtime geo location, ...). Specifially we will leverage multi-region clusters, often referred to as a stretch cluster,  which allow us to run a single Apache Kafka® cluster across multiple datacenters. Stretch clusters replicate data between datacenters across regional availability zones. You can choose how to replicate data, synchronously or asynchronously, on a per Kafka topic basis. It provides good durability guarantees and makes availabilit and disaster recovery (DR) much easier. The core benefits are,
 
 * Consumers can leverage data locality for reading Kafka data, which means better performance and lower cost
-* nOrdering of Kafka messages is preserved across datacenters
+* Ordering of Kafka messages is preserved across datacenters
 * Consumer offsets are preserved
 * In event of a disaster in a datacenter, new leaders are automatically elected in the other datacenter for the topics configured for synchronous replication, and applications proceed without interruption, achieving very low RTOs and RPO=0 for those topics.
 
