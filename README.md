@@ -101,9 +101,9 @@ Since events will be the foundation of data representation and flow in our CAD b
 
 Finally, event streaming also functions as a data integration or messaging backbone, letting different parts of a system communicate via events in a decoupled, asynchronous way. This trait allows us to decouple the SLO requirements of capabilites like real-time upates and analytics. (e.g. Performance & KPI Reporting)
 
-Now let's fill in the technologies, system components and backend api's that meet our functional and performance requirements,  
+Now let's fill in the technologies, system components and backend api's that meet our requirements,  
 
-<img width="7807" height="3802" alt="cad excalidraw" src="https://github.com/user-attachments/assets/bc835224-e1cf-4d4d-aae5-6224080fe6bc" />
+<img width="8177" height="4150" alt="cad excalidraw" src="https://github.com/user-attachments/assets/e4db5a44-2342-4607-9f60-44f4f6b69d63" />
 
 
 The critical choices for fulfilling our functionial and performance requirements are,
