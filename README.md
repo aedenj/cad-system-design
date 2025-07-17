@@ -102,7 +102,8 @@ Finally, event streaming also functions as a data integration or messaging backb
 
 Now let's fill in the technologies, system components and backend api's that meet our requirements,  
 
-<img width="8177" height="4164" alt="cad excalidraw" src="https://github.com/user-attachments/assets/3e85d264-87fc-4e0f-ae01-6c9343508d54" />
+<img width="8177" height="4164" alt="cad excalidraw" src="https://github.com/user-attachments/assets/dcf1a85c-be96-4c65-9247-2eb0a906ffba" />
+
 
 Let's briefly cover key technology choices that realize our key architectural patterns and some non-functional requirements, 
 
