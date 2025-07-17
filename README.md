@@ -158,15 +158,13 @@ theoretical best case across regions is defined by,
 <h4 align="center"><i>A<sub>total</sub> = 1 − (1 − A)<sup>N</sup></i></h4>
 
 which as 100% minus the product of the regions failure rate, which gives us <i>99.9999% = 100% − (0.1%×0.1%)</i> Additionally, we need to understand the availability of our hard
-external dependencies. Our ability to achieve five nines for critical use cases will also depend on the availability of dependencies.  In the case of hard dependencies like an RMS we would 
-calculate our availability as
+external dependencies.  In the case of, potentially, hard external dependencies like an RMS we would calculate our availability as
 
 <h4 align="center"><i>A<sub>cad</sub> = Avail<sub>acitve-region</sub> × Avail<sub>RMS</sub> × Avail<sub>EMD</sub>... Avail<sub>external</sub></i></h4>
 
-
 One of our cruicial assumptions here is that our CAD system services will meet our minimum SLA per region of 99.99% or we may blow the error budget through failover time. Acheiving this will require constant system testing. 
 
-All that said computing a maximum theoretical availability is only likely to produce a rough order of magnitude calculation, but by itself is likely not to be accurate. There are additional dependenices like the network, additional components in the individual services within a region etc. The assumpmtions and system proposed here gets us around five nines, but will need to consistent validatation against real world numbers. 
+All that said computing a maximum theoretical availability is  likely to produce a rough order of magnitude calculation and by itself is unlikely to be accurate. There are additional dependenices like the network, additional components in the individual services within a region etc. The assumptions and system proposed here gets us around five nines, but will need to be validated against real world numbers. 
 
 Now let's take a look out how we could layout our system in AWS,
 
