@@ -157,7 +157,7 @@ calculate our availability as
 
 One of our cruicial assumptions here is that our CAD system services will meet our minimum SLA per region of 99.99% or we may blow the error budget through failover time. Acheiving this will require constant system testing. 
 
-All that said computing a maximum theoretical availability is only likely to produce a rough order of magnitude calculation, but by itself is likely not to be accurate. There are additional dependenices like the network, additional components in the individual services within a region etc. The above is a starting point and will need to be consistently validated against real world numbers. 
+All that said computing a maximum theoretical availability is only likely to produce a rough order of magnitude calculation, but by itself is likely not to be accurate. There are additional dependenices like the network, additional components in the individual services within a region etc. The assumpmtions and system proposed here gets us around five nines, but will need to consistent validatation against real world numbers. 
 
 Now let's take a look out how we could layout our system in AWS,
 
