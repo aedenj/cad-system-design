@@ -158,7 +158,7 @@ All that said computing a maximum theoretical availability is only likely to pro
 
 Now let's take a look out how we could layout our system in AWS,
 
-<img width="4247" height="3478" alt="availability excalidraw" src="https://github.com/user-attachments/assets/571e3c93-c6b6-439c-bab2-a20734e9d7dc" />
+<img width="4247" height="3941" alt="availability excalidraw" src="https://github.com/user-attachments/assets/6e5164fd-feac-4a7d-b3fd-6345abb33056" />
 
 
 **Zero-Downtime Deployment** 
@@ -180,7 +180,7 @@ Blue-green deployment strategies will be used so that new versions of services c
     <td><b>Kafka</b></td>
     <td>
         <ul>
-            <li>It supports transactions and it a durable store.</li>
+            <li>It's a durable store that supports transactions.</li>
             <li>Battle tested for resilience</li>
         </ul>
     </td>
