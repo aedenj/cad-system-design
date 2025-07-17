@@ -104,7 +104,7 @@ Now let's fill in the technologies, system components and backend api's that mee
 
 <img width="8177" height="4164" alt="cad excalidraw" src="https://github.com/user-attachments/assets/3e85d264-87fc-4e0f-ae01-6c9343508d54" />
 
-Let's talk briefly about key technology choices that realize our key architectural patterns and non-functional requirements such as auditability and availability. 
+Let's briefly cover key technology choices that realize our key architectural patterns and some non-functional requirements, 
 
 First, stateless services are responsible for core capabilties: CAD service for incidents, message broadcaster for realtime updates, geo ingestion for responder tracking and integration service for interacting with external systems. The stateless nature of these services will be critical for the availability requirements addressed later. 
 
@@ -151,7 +151,7 @@ theoretical best case across regions is defined by,
 which as 100% minus the product of the regions failure rate, which gives us <i>99.9999% = 100% − (0.1%×0.1%)</i> Additionally, we need to understand the availability of our hard
 external dependencies. In the case of hard dependencies we would calculate our availability as
 
-<h4 align="center"><i>A<sub>workload</sub> = Avail<sub>invok</sub> × Avail<sub>dep1</sub> × Avail<sub>dep2</sub></i></h4>
+<h4 align="center"><i>A<sub>cad</sub> = Avail<sub>acitve-region</sub> × Avail<sub>RMS</sub> × Avail<sub>EMD</sub></i></h4>
 
 One of our cruicial assumptions here is that our CAD system services will meet our minimum SLA per region of 99.99% or we may blow the error budget through failover time. Acheiving this will require constant system testing. 
 
