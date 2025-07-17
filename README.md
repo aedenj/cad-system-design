@@ -4,6 +4,7 @@ Emergency service agencies are responsible for responding to urgent and life-thr
 
 [Computer Aided Dispatch](what_is_cad.pdf) provides an automated way for emergency service agencies to keep track of incidents, activities, information, tasks, messages and the status of deployed resources. By using a C.A.D. dispatchers are able to see the big picture, while at the same time maintaining detailed records of plans and actions for future reference. First responders are able to clearly communicate in realtime, while having much better situational awareness of surrounding events.
 
+<img width="931" height="436" alt="cad-system-context drawio" src="https://github.com/user-attachments/assets/61613268-1438-4286-99c0-283319fae208" />
 
 
 ## Requirements
