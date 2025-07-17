@@ -44,17 +44,16 @@ For more details on personas and their interactions see [What is CAD?](what_is_c
 * Latency
   * Broadcasting updates to all units in near-real time will happen < 200ms end-to-end
   * Searches < 1s
- 
+* Multi-Tenancy - Our CAD system will be cable of serving multiple tenants (e.g. multiple emergency response orgs) using some amoutn of shared infrastructure. 
 
 **Understanding Capacity**
 
-To understand capacity I looked at a few sources for the number of calls for the largest city in the US, NYC. Here I list two sources,
+To understand capacity for a single tenant I looked at a few sources for the number of calls for the largest city in the US, NYC. Here I list two sources,
 
 * New York City’s 911 system fields on average [approximately 33,000 emergency calls](downloads/pdf/psac2_feis/002_executive_summary.pdf), or a total of more than 12 million emergency calls per year.
 * NYC’s 911 system is the nation’s largest emergency communications system, receiving around [9 million calls each year.](https://www.nyc.gov/content/oti/pages/press-releases/next-gen-911-on-target-2024-completion)
 
-Peak traffic for a CAD system will include incident creation, unit updates, GPS/AVL events, query volume and user/unit sessions for real time updates. Given the total mentioned above let's attempt to estimate the 
-usage of the system. (A more complete document would do a little more research on actual figures)
+Peak traffic for a CAD system will include incident creation, unit updates, GPS/AVL events, query volume and user/unit sessions for real time updates. Given the total mentioned above let's attempt to estimate the usage of the system. (A more complete document would do a little more research on actual figures)
 
 <table border="1">
   <thead>
@@ -84,6 +83,7 @@ usage of the system. (A more complete document would do a little more research o
     </tr>
   </tbody>
 </table>
+
 
 ### Non-Goals
 
@@ -165,7 +165,7 @@ Now let's take a look out how we could layout our system in AWS,
 Blue-green deployment strategies will be used so that new versions of services can be released without taking the system offline. Container orchestration (ECS/EKS) and load balancers will be used to phase traffic gradually to new instances and revert if needed.
 
 
-**On Security**
+### On Security
 
 * Authentication & Authorization: All users must authenticate and are authorized based on role following the principle of least privilege. AWS Cognito or custom IAM-integrated authentication can be used.
 * Encryption: All data is encrypted in transit and at rest. APIs are only accessible over HTTPS/TLS, and internal service calls also use TLS within the VPC. At rest, databases (RDS, DynamoDB, etc.) use AWS KMS-managed encryption keys so that all sensitive data on disks is encrypted. 
