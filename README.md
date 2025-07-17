@@ -249,7 +249,7 @@ Blue-green deployment strategies will be used so that new versions of services c
     </td>
   </tr>
    <tr>
-    <td><b>Eventual Consistency</b></td>
+    <td><b>Eventual Consistency Everywhere</b></td>
     <td>
         <ul>
             <li>Isolating reads completely benefits performance, availability and technologies used, ending with the ability of building an unlimited number of read models dedicated to specific tasks with dedicated storage.</li>
@@ -259,6 +259,7 @@ Blue-green deployment strategies will be used so that new versions of services c
         <ul>
            <li>Complexity of implementation and maintence.</li>
            <li>Can result in undesirable actions in the systems. Assignment of units not actually available.</li>
+           <li>Potential need for more compensating actions in the system due to lack of current state.</li>
         </ul>
     </td>
   </tr>
