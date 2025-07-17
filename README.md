@@ -88,7 +88,7 @@ usage of the system. (A more complete document would do a little more research o
 ### Non-Goals
 
 * How to do deal with long-term event retention and access.
-* Security review.
+* Extensive security details. We do touch on some basics in the design.
 * Observability: We'll use existing infrastructure. (e.g. Prometheus & Grafana)
 * ...
 
@@ -103,8 +103,7 @@ Finally, event streaming also functions as a data integration or messaging backb
 
 Now let's fill in the technologies, system components and backend api's that meet our requirements,  
 
-<img width="8177" height="4164" alt="cad excalidraw" src="https://github.com/user-attachments/assets/53583048-78d5-4314-8945-8f24260023b2" />
-
+<img width="8177" height="4164" alt="cad excalidraw" src="https://github.com/user-attachments/assets/3e85d264-87fc-4e0f-ae01-6c9343508d54" />
 
 The critical choices for fulfilling our functionial and performance requirements are,
 
@@ -165,6 +164,15 @@ Now let's take a look out how we could layout our system in AWS,
 
 Blue-green deployment strategies will be used so that new versions of services can be released without taking the system offline. Container orchestration (ECS/EKS) and load balancers will be used to phase traffic gradually to new instances and revert if needed.
 
+
+**On Security**
+
+* Authentication & Authorization: All users must authenticate and are authorized based on role following the principle of least privilege. AWS Cognito or custom IAM-integrated authentication can be used.
+* Encryption: All data is encrypted in transit and at rest. APIs are only accessible over HTTPS/TLS, and internal service calls also use TLS within the VPC. At rest, databases (RDS, DynamoDB, etc.) use AWS KMS-managed encryption keys so that all sensitive data on disks is encrypted. 
+* Network Security: The system is deployed in a private AWS VPC with no direct internet exposure for backend instances. Only a load balancer or API gateway in a DMZ subnet accepts public traffic, and it forwards requests to the private application subnets. Security groups and network ACLs restrict access – e.g. database servers only accept connections from application servers on specific ports.
+* Monitoring & Protection: Something like CloudWatch and GuardDuty can be used to monitor for anomalies or intrusions.
+
+  
 # Alternatives
 
 <table>
