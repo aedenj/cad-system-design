@@ -90,7 +90,7 @@ Peak traffic for a CAD system will include incident creation, unit updates, GPS/
 * How to do deal with long-term event retention and access.
 * Extensive security details. We do touch on some basics in the design.
 * Observability: We'll use existing infrastructure. (e.g. Prometheus & Grafana)
-* 
+ 
 
 # Design
 
