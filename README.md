@@ -152,7 +152,7 @@ which as 100% minus the product of the regions failure rate, which gives us <i>9
 external dependencies. Our ability to achieve five nines for critical use cases will also depend on the availability of dependencies.  In the case of hard dependencies like an RMS we would 
 calculate our availability as
 
-<h4 align="center"><i>A<sub>cad</sub> = Avail<sub>acitve-region</sub> × Avail<sub>RMS</sub> × Avail<sub>EMD</sub></i></h4>
+<h4 align="center"><i>A<sub>cad</sub> = Avail<sub>acitve-region</sub> × Avail<sub>RMS</sub> × Avail<sub>EMD</sub>... Avail<sub>external</sub></i></h4>
 
 
 One of our cruicial assumptions here is that our CAD system services will meet our minimum SLA per region of 99.99% or we may blow the error budget through failover time. Acheiving this will require constant system testing. 
