@@ -292,4 +292,5 @@ Blue-green deployment strategies will be used so that new versions of services c
 * PSAC II Project Executive Summary by the NYC Mayor’s Office, July 2009, https://www.nyc.gov/html/nypd/downloads/pdf/psac2_feis/002_executive_summary.pdf
 * NYC's Next Generation 911 on Target for 2024 Completion, Dec 2022, https://www.nyc.gov/content/oti/pages/press-releases/next-gen-911-on-target-2024-completion
 * Event Streaming: How it Works, Benefits, and Use Cases, https://www.confluent.io/learn/event-streaming/#what-is-an-event-stream
+* Understanding Eventsourcing, Nov 2024, https://leanpub.com/eventmodeling-and-eventsourcing
 * Availability and Beyond, https://docs.aws.amazon.com/whitepapers/latest/availability-and-beyond-improving-resilience/availability-and-beyond-improving-resilience.html
