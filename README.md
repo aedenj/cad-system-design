@@ -131,7 +131,7 @@ Finally, Kafka will be the messaging backbone for event delivery to other system
 
 ### On Performance
 
-We set a 200ms end-to-end latency target for real time communcation. Many of the technology choices above are known for their strong performance in real time communication. The major outstanding question is what the performance of AWS DMS looks like. Based on experience CDC technologies, like Debizum, can run into delays with [WAL](https://www.postgresql.org/docs/current/wal-intro.html) at scale.  Given the relatively low volume of critical events even in the face of multi-tenancy this choice of AWS DMS is plausible, but of course needs verification.
+We set a 200ms end-to-end latency target for real time communcation. Many of the technology choices above are known for their strong performance in real time communication. The major outstanding question is what the performance of Debezium for CDC. Based on experience CDC technologies, like Debizum, can run into delays with [WAL](https://www.postgresql.org/docs/current/wal-intro.html) at scale.  Given the relatively low volume of critical events even in the face of multi-tenancy this choice of Debezium is plausible, but of course needs verification.
 
 ### On Consistency
 
