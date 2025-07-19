@@ -104,7 +104,6 @@ Now let's fill in the technologies, system components and backend api's that mee
 
 <img width="8177" height="4164" alt="cad excalidraw" src="https://github.com/user-attachments/assets/dcf1a85c-be96-4c65-9247-2eb0a906ffba" />
 
-
 Let's briefly cover key technology choices that realize our key architectural patterns and some non-functional requirements, 
 
 **Services**<br/><br/>
@@ -169,7 +168,7 @@ All that said computing a maximum theoretical availability is  likely to produce
 
 Now let's take a look out how we could layout our system in AWS,
 
-<img width="4247" height="3941" alt="availability excalidraw" src="https://github.com/user-attachments/assets/6e5164fd-feac-4a7d-b3fd-6345abb33056" />
+<img width="4247" height="3941" alt="availability excalidraw" src="https://github.com/user-attachments/assets/33dae3ef-1813-47cf-8d1e-566539808d66" />
 
 
 **Zero-Downtime Deployment** 
