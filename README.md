@@ -219,6 +219,7 @@ Blue-green deployment strategies will be used so that new versions of services c
             <li>Honestly, it appears ideal on paper. It's a native event store.</li>
             <li>Handle projections or event-handling logic within the database itself. (Can be simulated in Postgres)</li>
             <li>Provides features for event versioning, enabling compatibility and evolution of event schemas over time.</li>
+            <li>Natively emit events to external sinks. (e.g. Kafka)
             <li>Built-in features for event publishing and event subscription mechanisms, facilitating event-driven communication and integration within an application or across microservices,</li>
         </ul>
     </td>
