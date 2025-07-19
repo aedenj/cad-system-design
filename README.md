@@ -53,7 +53,7 @@ To understand capacity for a single tenant I looked at a few sources for the num
 * New York City’s 911 system fields on average [approximately 33,000 emergency calls](downloads/pdf/psac2_feis/002_executive_summary.pdf) per day, or a total of more than 12 million emergency calls per year.
 * NYC’s 911 system is the nation’s largest emergency communications system, receiving around [9 million calls each year.](https://www.nyc.gov/content/oti/pages/press-releases/next-gen-911-on-target-2024-completion)
 
-Peak traffic for a CAD system will include incident creation, unit updates, GPS/AVL events, query volume and user/unit sessions for real time updates. Given the total mentioned above let's attempt to estimate the usage of the system. (A more complete document would do a little more research on actual figures)
+Peak traffic for a CAD system will include incident creation, unit updates, GPS/AVL events, query volume and user/unit sessions for real time updates. Using the sources above we'll approximate key figures for use in our design. (A more complete document would do a little more research on actual figures)
 
 <table border="1">
   <thead>
